@@ -2,15 +2,27 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { LikesModule } from './modules/likes/likes.module';
+import { MenuItemOptionsModule } from './modules/menu.item.options/menu.item.options.module';
+import { MenuItemsModule } from './modules/menu.items/menu.items.module';
+import { OrderDetailModule } from './modules/order.detail/order.detail.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { RestaurantsModule } from './modules/restaurants/restaurants.module';
+import { ReviewsModule } from './modules/reviews/reviews.module';
 
 @Module({
   imports: [
-    UsersModule, 
-    ConfigModule.forRoot(
-      {isGlobal: true}
-    ),
+    UsersModule,
+    LikesModule,
+    MenuItemOptionsModule,
+    MenuItemsModule,
+    OrderDetailModule,
+    OrdersModule,
+    RestaurantsModule,
+    ReviewsModule, 
+    ConfigModule.forRoot({isGlobal: true}),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
